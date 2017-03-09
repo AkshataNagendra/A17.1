@@ -10,13 +10,15 @@ import java.util.*;
 public class NagendraAkshata1
 /**
  *           100 Integers          200 Integers          400 Integers          800 Integers
- * Bubble    4950                  19900                 79800                 319600
+ * Bubble    24390                 102376                400892                1608600
  * 
- * Selection 4950                  19900                 79800                 319600
+ * Selection 152446                60496                 240996                961996
  * 
- * Insertion 2762                  9266                  38166                 164877  
+ * Insertion 4843                  20201                 76065                 278937  
  * 
  * 2 sentence write-up:
+ * The amount of steps increases quadratically(function of x^2). This works for all the functions above. 
+ * Also, the InsertionSort takes significantly less steps.
  */
 {
 
@@ -43,14 +45,13 @@ public class NagendraAkshata1
     System.out.println();
     for (int outer = 0; outer < list.size() - 1; outer++){
          for (int inner = 0; inner < list.size()-outer-1; inner++){
-              if (list.get(inner) > list.get(inner + 1)){
+             steps+=3;
+             if (list.get(inner) > list.get(inner + 1)){
                   //swap list[inner] & list[inner+1]
+                  steps+=4;
                   int temp = list.get(inner);
                   list.set(inner, list.get(inner + 1));
                   list.set(inner + 1, temp);
-                  steps++;
-                }else {
-                  steps++;
                 }
             }
     }
@@ -70,15 +71,14 @@ public class NagendraAkshata1
     int min, temp;
     for (int outer = 0; outer < list.size() - 1; outer++){
       min = outer;
-        for (int inner = outer + 1; inner < list.size(); inner++){
-           if (list.get(inner) < list.get(min)) {
+      for (int inner = outer + 1; inner < list.size(); inner++){
+          steps+=3;
+          if (list.get(inner) < list.get(min)) {
                min = inner; // a new smallest item is found
-               steps++;
-           }else {
-               steps++;
             }
         }
       //swap list[outer] & list[min]
+      steps+=4;
       temp = list.get(outer);
       list.set(outer, list.get(min));
       list.set(min, temp);
@@ -102,10 +102,11 @@ public class NagendraAkshata1
 
         // Shift larger values to the right
         while (position > 0 && list.get(position - 1) > key){
-        steps++;
         list.set(position, list.get(position - 1));
         position--;
+        steps+=2;
        }
+       steps+=3;
        list.set(position, key);
     }
   }
